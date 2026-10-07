@@ -1,0 +1,17 @@
+{
+  "database": {
+    "session_id": "devin-49606b3877994cbc9a1d7162cd86a3ba",
+    "url": "https://app.devin.ai/sessions/49606b3877994cbc9a1d7162cd86a3ba",
+    "status": "running"
+  },
+  "cache": {
+    "session_id": "devin-84695ccb45b24afb84c4f72317e5cc29",
+    "url": "https://app.devin.ai/sessions/84695ccb45b24afb84c4f72317e5cc29",
+    "status": "running"
+  },
+  "network": {
+    "session_id": "devin-8f214f6082a04381b3c3c24a3f9710ca",
+    "url": "https://app.devin.ai/sessions/8f214f6082a04381b3c3c24a3f9710ca",
+    "status": "running"
+  }
+}
