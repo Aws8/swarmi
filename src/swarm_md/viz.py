@@ -147,7 +147,7 @@ cv.addEventListener('pointermove',e=>{
   const n=pick(e.clientX,e.clientY);hover=n;
   if(n){tip.style.display='block';tip.style.left=(e.clientX+14)+'px';tip.style.top=(e.clientY+14)+'px';
     tip.innerHTML='<div class="k">'+n.kind+'</div>'+esc(n.label)+(n.detail?'<br><span style="color:#8892b0">'+esc(n.detail)+'</span>':'')}
-  } else tip.style.display='none';
+  else tip.style.display='none';
 });
 cv.addEventListener('pointerup',()=>drag=null);
 cv.addEventListener('wheel',e=>{e.preventDefault();z*=e.deltaY<0?1.13:0.885;z=Math.min(4,Math.max(.25,z))},{passive:false});
