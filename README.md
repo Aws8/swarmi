@@ -56,14 +56,45 @@ stars; open questions pulse amber. Hover any star for its text, drag to
 pan, scroll to zoom. No dependencies, no network — one file you can
 attach anywhere.
 
+![mind-viz — a converged swarm's memory constellation](docs/mind-viz.png)
+
 ## Demo: a real swarm, in this repo
 
-`demo/` contains a memory repo whose swarm debugged a real slowdown —
-`demo/app/server.py` is a checkout server with a planted bug (a price
-cache that rebuilds its table under one lock), and `demo/app/bench.py` is
-the shared measuring stick every agent used. The agents' board is at
-`demo/memory-repo/swarms/checkout-slow/` — real findings, real questions,
-real session URLs. Replay the viz:
+This run actually happened. Three Devin sessions — spawned with
+`devin_session_create`, tagged `swarmi-demo` — debugged
+`demo/app/server.py`, a checkout server with a planted bug (a price cache
+rebuilding its 50k-row table under one lock). Each agent owned an area
+(database / cache / network), measured only with the shared
+`demo/app/bench.py`, and coordinated through the board at
+[`demo/memory-repo/swarms/checkout-slow/`](demo/memory-repo/swarms/checkout-slow/).
+
+What the board recorded:
+
+- **21 findings, 3 questions — converged.** Every finding carries the
+  real session URL that measured it.
+- **cache** measured the tail and proved it: p99 ~420ms, every slow
+  request inside a rebuild window.
+- **network** answered cache's follow-up by sweeping concurrency:
+  C=16 → connect p99 ~2s — matching the reported 2.4s — via SYN drops
+  when the 5-deep accept backlog overflows during a stall. Amplifier,
+  not cause.
+- **database** ruled out data access, then *verified the fix*: rebuild
+  off-lock, swap under lock → tail collapses to p99 17ms.
+- cache reviewed the fix on the board — agreed, with the correct caveat
+  for dynamic sources.
+
+The sessions:
+[database](https://app.devin.ai/sessions/49606b3877994cbc9a1d7162cd86a3ba) ·
+[cache](https://app.devin.ai/sessions/84695ccb45b24afb84c4f72317e5cc29) ·
+[network](https://app.devin.ai/sessions/8f214f6082a04381b3c3c24a3f9710ca)
+
+Artifacts the swarm left behind:
+[`findings.md`](demo/memory-repo/swarms/checkout-slow/findings.md) ·
+[`questions.md`](demo/memory-repo/swarms/checkout-slow/questions.md) ·
+[`report.md`](demo/memory-repo/swarms/checkout-slow/report.md) ·
+[`mind.html`](demo/memory-repo/swarms/checkout-slow/mind.html) (open it)
+
+Replay the viz yourself:
 
 ```sh
 swarm viz demo/memory-repo/swarms/checkout-slow
