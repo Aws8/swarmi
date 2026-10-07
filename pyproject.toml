@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "swarm-md"
+version = "0.1.0"
+description = "Run agent swarms on memory repos — fan out Devin sessions that coordinate through Agent Memory Repo message boards"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "Aws", email = "mrawsrek@gmail.com" }]
+keywords = ["agent-memory-repo", "devin", "ai-agents", "swarm", "orchestration", "mcp"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.urls]
+Homepage = "https://github.com/Aws8/swarmi"
+"Agent Memory Repo spec" = "https://cognition.com/agent-memory-repo"
+BugTracker = "https://github.com/Aws8/swarmi/issues"
+
+[project.scripts]
+swarm = "swarm_md.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
